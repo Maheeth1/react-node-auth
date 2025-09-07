@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
 
     // Configure axios to send cookies with every request
     axios.defaults.withCredentials = true;
-    const API_URL = 'http://localhost:5000/api/auth';
+    const API_URL = 'http://localhost:5000/api/auth' ;
 
     useEffect(() => {
         axios.get(`${API_URL}/check-session`)
