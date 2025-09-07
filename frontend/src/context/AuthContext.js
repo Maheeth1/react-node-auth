@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
 
     // Configure axios to send cookies with every request
     axios.defaults.withCredentials = true;
-    const API_URL = 'http://localhost:5000/api/auth' || process.env.REACT_APP_API_URL || "https://react-node-auth-qbb3.onrender.com/";
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/auth';
 
     useEffect(() => {
         axios.get(`${API_URL}/check-session`)

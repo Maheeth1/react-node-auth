@@ -11,7 +11,11 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000', // ✅ use env variable for frontend URL
+    origin: [
+        process.env.CLIENT_URL,
+        'http://localhost:3000', // For local development
+        'https://react-node-auth-ten.vercel.app' // For Vercel deployment
+    ].filter(Boolean), // Filter out undefined values
     credentials: true,
 }));
 app.use(express.json());
@@ -32,13 +36,13 @@ app.use(session({
 // API Routes
 app.use('/api/auth', authRoutes);
 
-// ✅ Serve React frontend (make sure you built it first: cd frontend && npm run build)
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+// ✅ Remove static file serving since frontend is deployed separately on Vercel
+// app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// ✅ Fallback route: any non-API request → React app
-app.get(/^(?!\/api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-});
+// ✅ Remove fallback route since frontend is deployed separately
+// app.get(/^(?!\/api).*/, (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+// });
 
 
 // Start server
