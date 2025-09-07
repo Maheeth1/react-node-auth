@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         axios.get(`${API_URL}/check-session`)
-            .then(res => {
+            .then(res => { 
                 if (res.data.loggedIn) {
                     setUser(res.data.user);
                 }
