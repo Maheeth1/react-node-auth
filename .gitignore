@@ -1,0 +1,8 @@
+# backend dependencies
+backend/node_modules
+
+# frontend dependencies
+frontend/node_modules
+
+# build folder
+frontend/build
