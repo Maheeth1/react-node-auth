@@ -36,9 +36,10 @@ app.use('/api/auth', authRoutes);
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // ✅ Fallback route: any non-API request → React app
-app.get('/*/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
+
 
 // Start server
 app.listen(PORT, () => {
